@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+}
+
+.dealer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.dealer-cards label {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.dealer-cards input {
+  width: 48%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.user-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.user {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.user h2 {
+  margin-bottom: 10px;
+}
+
+.user-slot {
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.user-slot label {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.user-slot input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.possible-cards {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card-info img {
+  width: 50px;
+  height: 80px;
+  margin-right: 10px;
+}
+
+.counts {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.count {
+  width: 48%;
+}
+
+.count span {
+  font-weight: bold;
+}
+
+.suggested-move, .win-rate {
+  margin-bottom: 20px;
+}
+
+.suggested-move span, .win-rate span {
+  font-weight: bold;
+}
+  </style>>
+  <title>BlackJack AI @lemonscripting</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>BlackJack AI @lemonscripting</h1>
+    </div>
+
+    <div class="dealer-cards">
+      <label for="dealerCard1">Dealer Card 1:</label>
+      <input type="text" id="dealerCard1">
+      <label for="dealerCard2">Dealer Card 2:</label>
+      <input type="text" id="dealerCard2">
+    </div>
+
+    <div class="user-cards">
+      <div class="user" id="user1">
+        <h2>User 1</h2>
+        <div class="user-slot">
+          <label for="user1Card1">Card 1:</label>
+          <input type="text" id="user1Card1">
+        </div>
+        <div class="user-slot">
+          <label for="user1Card2">Card 2:</label>
+          <input type="text" id="user1Card2">
+        </div>
+      </div>
+      <!-- Add similar user slots for remaining users -->
+    </div>
+
+    <div class="possible-cards">
+      <div class="card-info">
+        <img src="image1.jpg" alt="Card 1">
+        <span>80%</span>
+      </div>
+      <!-- Add similar card info for top 3 cards -->
+    </div>
+
+    <div class="counts">
+      <div class="count">
+        <span>Running Count:</span>
+        <div id="runningCount">0</div>
+      </div>
+
+      <div class="count">
+        <span>True Count:</span>
+        <div id="trueCount">0</div>
+      </div>
+    </div>
+
+    <div class="suggested-move">
+      <span>Suggested Move:</span>
+      <div id="suggestedMove">Hit</div>
+    </div>
+
+    <div class="win-rate">
+      <span>Win Rate:</span>
+      <div id="winRate">75%</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

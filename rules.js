@@ -29,4 +29,19 @@ const pokerCards = [
 
 //Hi-Lo card counting
 //https://www.youtube.com/watch?v=SHK2C-QQR-k
-  
+//2-6 low cards 
+//value +1
+//10-ace high cards
+//value -1
+//7-9 neutral
+//value 0
+//always ends at 0
+//>negative value > low cards
+//>positive value > high cards
+
+//running count = realtime value
+//true count = running count / number of decks left
+
+//always round down
+
+//higher values are better for players
