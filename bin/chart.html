@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Poker Deck Card Counter</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .card-possibility {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
+
 <body>
   <canvas id="cardCountChart"></canvas>
   <button onclick="decreaseCount('Two')">Two</button>
@@ -21,6 +28,19 @@
   <button onclick="decreaseCount('Queen')">Queen</button>
   <button onclick="decreaseCount('King')">King</button>
   <button onclick="decreaseCount('Ace')">Ace</button>
+
+  <div id="card-possibilities">
+    <div class="card-possibility" id="two-possibility"></div>
+    <div class="card-possibility" id="three-possibility"></div>
+    <div class="card-possibility" id="four-possibility"></div>
+    <div class="card-possibility" id="five-possibility"></div>
+    <div class="card-possibility" id="six-possibility"></div>
+    <div class="card-possibility" id="seven-possibility"></div>
+    <div class="card-possibility" id="eight-possibility"></div>
+    <div class="card-possibility" id="nine-possibility"></div>
+    <div class="card-possibility" id="ten-possibility"></div>
+    <div class="card-possibility" id="ace-possibility"></div>
+  </div>
 
   <script>
     var cardCounts = {
@@ -38,10 +58,6 @@
       'Ace': 4,
       'Queen': 4
     };
-    //accessing variables
-//console.log(cardCounts['Two']);
-//cardCounts['Two']++;
-//console.log(cardCounts['Two']);
 
     var labels = Object.keys(cardCounts);
     var data = Object.values(cardCounts);
@@ -63,12 +79,8 @@
         scales: {
           y: {
             beginAtZero: true,
-            //stepSize: 3.85,
-            ticks: {
-              //stepSize: 3.85 // forces step size to be 3.85 units
-              stepSize: 1
-            },
-            callback: function(value, index, values) {
+            stepSize: 1,
+            callback: function (value, index, values) {
               return value + '%';
             }
           }
@@ -76,7 +88,7 @@
         plugins: {
           tooltip: {
             callbacks: {
-              label: function(context) {
+              label: function (context) {
                 var totalCount = data.reduce((a, b) => a + b, 0);
                 var ratio = (cardCounts[labels[context.dataIndex]] / totalCount) * 100;
                 return 'Ratio: ' + ratio.toFixed(2) + '%';
@@ -91,6 +103,32 @@
       data = Object.values(cardCounts);
       myChart.data.datasets[0].data = data;
       myChart.update();
+      // Update the possibility for each card
+      var TWO = cardCounts['Two'];
+      var THREE = cardCounts['Three'];
+      var FOUR = cardCounts['Four'];
+      var FIVE = cardCounts['Five'];
+      var SIX = cardCounts['Six'];
+      var SEVEN = cardCounts['Seven'];
+      var EIGHT = cardCounts['Eight'];
+      var NINE = cardCounts['Nine'];
+      var TEN = cardCounts['Ten'] + cardCounts['King'] + cardCounts['Jack'] + cardCounts['Queen'];
+      var ACE = cardCounts['Ace'];
+
+      function calculatePercentage(count) {
+        return ((count / Object.values(cardCounts).reduce((acc, count) => acc + count, 0)) * 100).toFixed(2);
+      }
+
+      document.getElementById('two-possibility').innerText = 'Two: ' + calculatePercentage(TWO) + '%';
+      document.getElementById('three-possibility').innerText = 'Three: ' + calculatePercentage(THREE) + '%';
+      document.getElementById('four-possibility').innerText = 'Four: ' + calculatePercentage(FOUR) + '%';
+      document.getElementById('five-possibility').innerText = 'Five: ' + calculatePercentage(FIVE) + '%';
+      document.getElementById('six-possibility').innerText = 'Six: ' + calculatePercentage(SIX) + '%';
+      document.getElementById('seven-possibility').innerText = 'Seven: ' + calculatePercentage(SEVEN) + '%';
+      document.getElementById('eight-possibility').innerText = 'Eight: ' + calculatePercentage(EIGHT) + '%';
+      document.getElementById('nine-possibility').innerText = 'Nine: ' + calculatePercentage(NINE) + '%';
+      document.getElementById('ten-possibility').innerText = 'Ten: ' + calculatePercentage(TEN) + '%';
+      document.getElementById('ace-possibility').innerText = 'Ace: ' + calculatePercentage(ACE) + '%';
     }
 
     function decreaseCount(cardType) {
@@ -103,7 +141,7 @@
       }
 
       // Update the tooltip content
-      myChart.options.plugins.tooltip.callbacks.label = function(context) {
+      myChart.options.plugins.tooltip.callbacks.label = function (context) {
         var totalCount = data.reduce((a, b) => a + b, 0);
         var ratio = (cardCounts[labels[context.dataIndex]] / totalCount) * 100;
         return 'Ratio: ' + ratio.toFixed(2) + '%';
@@ -113,4 +151,5 @@
     }
   </script>
 </body>
+
 </html>
