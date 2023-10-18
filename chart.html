@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Deck Card Counter</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div>
+        <label for="card-input">Enter card numbers (2 to 11): </label>
+        <input type="text" id="card-input" placeholder="e.g., 'two [2], five [5], king [10]'"
+            oninput="calculateCardProbability()">
+    </div>
+    <canvas id="cardChart" width="400" height="200"></canvas>
+
+    <script>
+        var remainingTwo = 4;
+        var remainingThree = 4;
+        var remainingFour = 4;
+        var remainingFive = 4;
+        var remainingSix = 4;
+        var remainingSeven = 4;
+        var remainingEight = 4;
+        var remainingNine = 4;
+        var remainingTen = 4;
+        var remainingKing = 4;
+        var remainingQueen = 4;
+        var remainingJack = 4;
+        var remainingAce = 4;
+//2 to 10 numbers
+        function calculateCardProbability() {
+            const cardInput = document.getElementById('card-input').value.toLowerCase();
+            const cardTypes = ['two [2]', 'three [3]', 'four [4]', 'five [5]', 'six [6]', 'seven [7]', 'eight [8]', 'nine [9]', 'ten [10]', 'king [10]', 'queen [10]', 'jack [10]', 'ace [1/11]'];
+            const cardCounts = [0, 0, 0, 0];
+
+            // Count occurrences of each card type
+            for (let i = 0; i < cardTypes.length; i++) {
+                if (cardInput.includes(cardTypes[i])) {
+                    cardCounts[i]++;
+                }
+            }
+
+            // Calculate percentages
+            const totalCards = cardCounts.reduce((acc, count) => acc + count, 0);
+            const percentages = cardCounts.map(count => (count / totalCards) * 100);
+
+            // Display the percentages in a chart
+            const ctx = document.getElementById('cardChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['two [2]', 'three [3]', 'four [4]', 'five [5]', 'six [6]', 'seven [7]', 'eight [8]', 'nine [9]', 'ten [10]', 'king [10]', 'queen [10]', 'jack [10]', 'ace [1/11]'],
+                    datasets: [{
+                        label: 'Card Probability (%)',
+                        data: percentages,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+</body>
+
+</html>
